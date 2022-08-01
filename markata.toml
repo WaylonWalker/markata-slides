@@ -1,0 +1,21 @@
+[markata]
+
+hooks = ['default', 'plugins.slides', 'markata.plugins.prevnext']
+
+[markata.prevnext]
+# strategy can be 'first' or 'all'
+# 'first' will cycle through the first map the post is found in.
+# 'all' will cycle through all of the maps
+
+strategy='first'
+
+[markata.feeds.slides]
+filter='"slide" in post.keys()'
+sort='slug'
+reverse=false
+
+[markata.feeds.all]
+filter='True'
+sort='slug'
+reverse=false
+
