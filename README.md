@@ -38,5 +38,3 @@ hooks = ['default', 'markata_slides']
 markata build
 markata tui
 ```
-
-

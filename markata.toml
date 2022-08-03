@@ -1,6 +1,7 @@
 [markata]
 
-hooks = ['default', 'markata_slides', 'markata.plugins.prevnext']
+# hooks = ['default', 'markata_slides', 'markata.plugins.prevnext']
+hooks = ['default', 'markata_slides']
 
 [markata.prevnext]
 # strategy can be 'first' or 'all'
@@ -9,13 +10,12 @@ hooks = ['default', 'markata_slides', 'markata.plugins.prevnext']
 
 strategy='first'
 
-[markata.feeds.slides]
-filter='"slide" in post.keys()'
-sort='slug'
-reverse=false
+# [markata.feeds.slides]
+# filter='"slide" in post.keys()'
+# sort='slug'
+# reverse=false
 
 [markata.feeds.all]
 filter='True'
 sort='slug'
 reverse=false
-

@@ -1,5 +1,13 @@
+"""
+Markata Slides plugin
+
+Splits markdown documents into individual slides.
+"""
+
 import copy
+import importlib
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 import more_itertools
 from frontmatter import Post
@@ -7,6 +15,9 @@ from markata.hookspec import hook_impl
 from markdown_it import MarkdownIt
 from mdit_py_plugins.footnote import footnote_plugin
 from mdit_py_plugins.front_matter import front_matter_plugin
+
+if TYPE_CHECKING:
+    from markata import Markata
 
 md = (
     MarkdownIt()
@@ -20,10 +31,10 @@ keys = """
 <script>
 document.onkeyup = function (e) {
     if (e.key === 'j') {
-        document.querySelectorAll('a.prev')[0].click()
+        document.querySelectorAll('a.next')[0].click()
     }
     if (e.key === 'k') {
-        document.querySelectorAll('a.next')[0].click()
+        document.querySelectorAll('a.prev')[0].click()
     }
 }
 </script>
@@ -31,6 +42,9 @@ document.onkeyup = function (e) {
 
 
 def slide(markata, article):
+    """
+    split article into slides and append them to markata.articles
+    """
 
     tokens = md.parse(article.content)
     breaks = [
@@ -55,7 +69,35 @@ def slide(markata, article):
 
 @hook_impl(trylast=True)
 # @register_attr("articles")
-def load(markata: "MarkataMarkdown") -> None:
+def configure(markata: "Markata") -> None:
+    """
+    Ensure that markata_slides and it's dependent plugins are active and
+    configured.
+    """
+
+    feeds_config = markata.config.get("feeds", {})
+    print("configuring slides")
+    if "prevnext" not in str(markata._pm.get_plugins()):
+        markata._pm.register(importlib.import_module("markata.plugins.prevnext"))
+        markata.hooks.append("markata.plugins.prevnext")
+    if "slides" not in feeds_config.keys():
+        feeds_config = {
+            "slides": {
+                "filter": '"slide" in post.keys()',
+                "sort": 'post.get("slide", "")',
+                "reverse": "True",
+            },
+            **feeds_config,
+        }
+        markata.config["feeds"] = feeds_config
+
+
+@hook_impl(trylast=True)
+# @register_attr("articles")
+def load(markata: "Markata") -> None:
     for article in markata.articles:
+        """
+        split all articles into slides
+        """
         if article.get("slide", True):
             slide(markata, article)
