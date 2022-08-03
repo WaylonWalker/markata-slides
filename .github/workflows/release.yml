@@ -33,6 +33,16 @@ jobs:
           git push
           git push --tags
 
+      - name: automatically bump main branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config --global user.name 'autobump'
+          git config --global user.email 'autobump@markata_slides.dev'
+          pip install bump2version
+          bump2version patch
+          git push
+          git push --tags
+
       - name: build
         run: |
           pip install wheel
