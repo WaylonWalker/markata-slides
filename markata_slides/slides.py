@@ -95,9 +95,9 @@ def configure(markata: "Markata") -> None:
 @hook_impl(trylast=True)
 # @register_attr("articles")
 def load(markata: "Markata") -> None:
+    """
+    split all articles into slides
+    """
     for article in markata.articles:
-        """
-        split all articles into slides
-        """
         if article.get("slide", True):
             slide(markata, article)
