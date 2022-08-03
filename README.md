@@ -13,7 +13,7 @@ hotkeys similar to lookatme.
 
 
 ``` bash
-pip install marata-slides
+pip install markata-slides
 ```
 
 ## Usage
