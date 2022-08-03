@@ -21,7 +21,7 @@ jobs:
 
       - run: black --check markata_slides
       - run: flake8 markata_slides
-      - run: interrogate markata_slides
+      - run: interrogate -Iivvv markata_slides
 
       - name: automatically pre-release develop branch
         if: github.ref == 'refs/heads/develop'
