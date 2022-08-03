@@ -1,6 +1,6 @@
 [markata]
 
-hooks = ['default', 'plugins.slides', 'markata.plugins.prevnext']
+hooks = ['default', 'markata_slides', 'markata.plugins.prevnext']
 
 [markata.prevnext]
 # strategy can be 'first' or 'all'
