@@ -1,3 +1,0 @@
-markata
-markdown-it-py[plugins]
-mdit-py-plugins
