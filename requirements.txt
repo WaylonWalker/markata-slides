@@ -1,3 +1,4 @@
 markata
 markdown-it-py[plugins]
 mdit-py-plugins
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
