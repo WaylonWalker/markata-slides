@@ -85,7 +85,7 @@ def configure(markata: "Markata") -> None:
             "slides": {
                 "filter": '"slide" in post.keys()',
                 "sort": 'post.get("slide", "")',
-                "reverse": "True",
+                "reverse": False,
             },
             **feeds_config,
         }
