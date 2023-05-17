@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - '*'
+      - "*"
 env:
   HATCH_INDEX_USER: __token__
   HATCH_INDEX_AUTH: ${{ secrets.pypi_token }}
@@ -11,7 +11,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: waylonwalker/hatch-action@v2
+      - uses: actions/checkout@v3
+      - uses: waylonwalker/hatch-action@v3
         with:
           before-command: "lint"
